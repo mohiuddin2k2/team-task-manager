@@ -80,15 +80,11 @@ public class SecurityConfig {
             .filter(value -> !value.isEmpty())
             .toList();
 
-        configuration.setAllowedOriginPatterns(
-            allowedOrigins.isEmpty()
-                ? List.of("*")
-                : java.util.stream.Stream.concat(allowedOrigins.stream(), java.util.stream.Stream.of("*")).toList()
-        );
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setExposedHeaders(List.of("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
