@@ -1,0 +1,785 @@
+:root {
+  --bg: #f4f5f7;
+  --bg-elevated: rgba(255, 255, 255, 0.92);
+  --bg-panel: #ffffff;
+  --bg-soft: #f7f9fc;
+  --bg-strong: #0f172a;
+  --text: #172b4d;
+  --text-soft: #52627a;
+  --border: rgba(9, 30, 66, 0.12);
+  --accent: #0c66e4;
+  --accent-soft: rgba(12, 102, 228, 0.14);
+  --success: #1f845a;
+  --warning: #b65c02;
+  --danger: #c9372c;
+  --shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+  --nav-width: 340px;
+  --nav-collapsed-width: 92px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(54, 179, 126, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(76, 154, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, #f8fbff, #eef2f8 54%, #f5f6fb);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+:root[data-theme="dark"] {
+  --bg: #10151f;
+  --bg-elevated: rgba(22, 28, 39, 0.92);
+  --bg-panel: #161c27;
+  --bg-soft: #1d2532;
+  --bg-strong: #eff6ff;
+  --text: #e6edf7;
+  --text-soft: #9fb0c8;
+  --border: rgba(159, 176, 200, 0.16);
+  --accent: #4c9aff;
+  --accent-soft: rgba(76, 154, 255, 0.18);
+  --success: #4bce97;
+  --warning: #f5cd47;
+  --danger: #f87168;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+  background:
+    radial-gradient(circle at top left, rgba(76, 154, 255, 0.16), transparent 26%),
+    radial-gradient(circle at top right, rgba(75, 206, 151, 0.14), transparent 24%),
+    linear-gradient(180deg, #0d1119, #111827 55%, #0f1722);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-panel);
+  color: var(--text);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.auth-shell,
+.dashboard-shell {
+  min-height: 100vh;
+  padding: 18px;
+}
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.jira-shell {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: var(--nav-width) 1fr;
+  align-items: start;
+}
+
+.jira-shell.nav-collapsed {
+  grid-template-columns: var(--nav-collapsed-width) 1fr;
+}
+
+.hero-panel,
+.auth-card,
+.panel,
+.workspace-nav,
+.workspace-main,
+.modal-card {
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+}
+
+.hero-panel,
+.auth-card,
+.workspace-nav,
+.workspace-main {
+  padding: 24px;
+}
+
+.surface-panel {
+  min-height: calc(100vh - 36px);
+}
+
+.jira-hero {
+  padding: 52px;
+}
+
+.hero-panel h1,
+.workspace-header h1 {
+  margin: 0;
+  line-height: 1;
+}
+
+.hero-panel h1 {
+  max-width: 760px;
+  font-size: clamp(2.7rem, 5vw, 4.7rem);
+}
+
+.workspace-header h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+.hero-copy,
+.subtle-copy,
+.board-header p,
+.task-card p,
+.personal-task span,
+.interactive-row span {
+  color: var(--text-soft);
+}
+
+.hero-grid,
+.stats-grid,
+.workspace-content,
+.kanban-grid,
+.project-insights {
+  display: grid;
+  gap: 16px;
+}
+
+.hero-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 28px;
+}
+
+.hero-grid div,
+.stat-card,
+.kanban-column,
+.insight-card,
+.detail-card,
+.comment-card,
+.board-guidance {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.hero-grid strong,
+.stat-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.switcher {
+  display: inline-flex;
+  padding: 6px;
+  gap: 6px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+}
+
+.switcher button,
+.theme-toggle,
+.ghost-button,
+.primary-button,
+.danger-button,
+.project-item,
+.status-actions button,
+.nav-item,
+.contact-pill,
+.contact-list-item,
+.interactive-row,
+.nav-toggle {
+  border: none;
+  transition: transform 160ms ease, opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.switcher button,
+.theme-toggle,
+.ghost-button,
+.primary-button,
+.danger-button,
+.nav-toggle {
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+.switcher .active,
+.project-item.active,
+.primary-button,
+.nav-item.active,
+.contact-pill.active,
+.contact-list-item.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.ghost-button,
+.theme-toggle,
+.status-actions button,
+.nav-item,
+.contact-pill,
+.contact-list-item,
+.nav-toggle {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.danger-button {
+  background: var(--danger);
+  color: #fff;
+  border-radius: 14px;
+}
+
+.floating {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 30;
+}
+
+.form-card {
+  display: grid;
+  gap: 14px;
+}
+
+.compact {
+  margin-top: 14px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.workspace-nav {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  min-height: calc(100vh - 36px);
+  padding: 18px 14px;
+}
+
+.nav-brand,
+.panel-title-row,
+.workspace-header,
+.toolbar-actions,
+.board-header,
+.board-meta,
+.task-card-header,
+.status-actions,
+.modal-actions,
+.tour-controls,
+.kanban-title,
+.member-strip,
+.drawer-title,
+.comment-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand,
+.panel-title-row,
+.workspace-header,
+.board-header,
+.kanban-title,
+.drawer-title {
+  justify-content: space-between;
+}
+
+.toolbar-actions,
+.board-meta,
+.modal-actions,
+.tour-controls,
+.member-strip {
+  flex-wrap: wrap;
+}
+
+.nav-brand h2,
+.drawer-title h3,
+.board-header h2,
+.kanban-title h3,
+.modal-card h3 {
+  margin: 0;
+}
+
+.nav-items {
+  display: grid;
+  gap: 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 18px;
+  padding: 12px;
+  text-align: left;
+}
+
+.nav-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 0.73rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.12);
+  flex: 0 0 auto;
+}
+
+.nav-label {
+  font-weight: 700;
+}
+
+.nav-count {
+  margin-left: auto;
+  min-width: 28px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.nav-drawer {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.drawer-section,
+.mini-roster {
+  display: grid;
+  gap: 12px;
+}
+
+.project-list {
+  display: grid;
+  gap: 10px;
+  overflow: auto;
+}
+
+.compact-list {
+  max-height: 240px;
+}
+
+.project-item,
+.contact-list-item {
+  text-align: left;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.project-item strong,
+.project-item span,
+.project-item small,
+.contact-list-item strong {
+  display: block;
+}
+
+.project-item span,
+.project-item small {
+  color: var(--text-soft);
+}
+
+.mini-roster-row,
+.profile-chip,
+.insight-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-roster-row {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+.contact-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.workspace-main {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: 20px;
+}
+
+.stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.stat-card span {
+  color: var(--text-soft);
+}
+
+.stat-card strong {
+  font-size: 2rem;
+}
+
+.stat-card.danger strong {
+  color: var(--danger);
+}
+
+.workspace-content {
+  grid-template-columns: minmax(0, 1.6fr) minmax(360px, 0.9fr);
+  align-items: start;
+}
+
+.workspace-rail {
+  display: grid;
+  gap: 16px;
+}
+
+.board-panel,
+.rail-section {
+  padding: 20px;
+}
+
+.tag,
+.status-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.tag {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.profile-chip {
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex: 0 0 auto;
+}
+
+.profile-avatar.small {
+  width: 34px;
+  height: 34px;
+  font-size: 0.84rem;
+}
+
+.profile-avatar.tiny {
+  width: 28px;
+  height: 28px;
+  font-size: 0.72rem;
+}
+
+.profile-meta {
+  display: grid;
+  gap: 2px;
+}
+
+.profile-meta span {
+  color: var(--text-soft);
+  font-size: 0.84rem;
+}
+
+.stack-list,
+.detail-card,
+.comment-list,
+.direct-thread {
+  display: grid;
+  gap: 10px;
+}
+
+.kanban-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.board-guidance {
+  margin-top: 18px;
+  color: var(--text-soft);
+}
+
+.kanban-column {
+  align-content: start;
+}
+
+.task-card,
+.personal-task,
+.interactive-row {
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+.task-card {
+  cursor: pointer;
+}
+
+.task-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(12, 102, 228, 0.12);
+}
+
+.status-pill.todo {
+  background: rgba(76, 154, 255, 0.14);
+  color: #1d4ed8;
+}
+
+.status-pill.in_progress {
+  background: rgba(245, 205, 71, 0.2);
+  color: var(--warning);
+}
+
+.status-pill.done {
+  background: rgba(75, 206, 151, 0.18);
+  color: var(--success);
+}
+
+.status-actions {
+  justify-content: flex-start;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.status-actions button {
+  flex: 1 1 92px;
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.comment-card p,
+.message-bubble p {
+  margin: 10px 0 0;
+  color: var(--text);
+}
+
+.contact-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.contact-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.message-bubble {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+.message-bubble.mine {
+  background: var(--accent-soft);
+  border-color: rgba(12, 102, 228, 0.28);
+}
+
+.interactive-row {
+  width: 100%;
+  text-align: left;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(9, 30, 66, 0.42);
+  z-index: 40;
+}
+
+.modal-card {
+  width: min(100%, 560px);
+  padding: 28px;
+}
+
+.smooth-pop {
+  animation: smoothPop 180ms ease-out;
+}
+
+.tour-card {
+  width: min(100%, 620px);
+}
+
+.tour-progress {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.tour-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.tour-dot.active {
+  background: var(--accent);
+}
+
+.empty-state,
+.loading-state {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.empty-state {
+  min-height: 320px;
+}
+
+.loading-state {
+  min-height: 100vh;
+  font-size: 1.1rem;
+}
+
+.error-text,
+.error-banner {
+  color: #fff;
+  background: var(--danger);
+}
+
+.error-banner,
+.success-banner {
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.success-banner {
+  color: #fff;
+  background: var(--success);
+}
+
+@keyframes smoothPop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 1380px) {
+  .workspace-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1180px) {
+  .jira-shell,
+  .stats-grid,
+  .kanban-grid,
+  .project-insights,
+  .auth-shell,
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-header,
+  .board-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .jira-shell,
+  .jira-shell.nav-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-nav {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .auth-shell,
+  .dashboard-shell {
+    padding: 12px;
+  }
+
+  .jira-hero,
+  .hero-panel,
+  .auth-card,
+  .workspace-nav,
+  .workspace-main {
+    padding: 16px;
+  }
+
+  .floating {
+    top: 16px;
+    right: 16px;
+  }
+}
