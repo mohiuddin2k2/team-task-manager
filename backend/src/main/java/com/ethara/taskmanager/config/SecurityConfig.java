@@ -80,7 +80,11 @@ public class SecurityConfig {
             .filter(value -> !value.isEmpty())
             .toList();
 
-        configuration.setAllowedOriginPatterns(allowedOrigins);
+        configuration.setAllowedOriginPatterns(
+            allowedOrigins.isEmpty()
+                ? List.of("*")
+                : java.util.stream.Stream.concat(allowedOrigins.stream(), java.util.stream.Stream.of("*")).toList()
+        );
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setExposedHeaders(List.of("Authorization", "Content-Type"));
